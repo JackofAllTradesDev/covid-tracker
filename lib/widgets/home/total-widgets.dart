@@ -9,10 +9,22 @@ class TotalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final f = new DateFormat('MMMM d y hh:mm a');
     final formatter = new NumberFormat("#,###");
+    final finalDate = DateTime.parse(countries.lastUpdated);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Align(
+              alignment: Alignment.bottomRight,
+              child: Text("Last update: ${f.format(finalDate)}",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                  ))),
+        ),
         Card(
           color: Colors.white,
           elevation: 8.0,

@@ -1,19 +1,18 @@
 import 'package:covidapp/model/countries.dart';
+import 'package:covidapp/services/countries-data.dart';
 import 'package:covidapp/services/country-name.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class TitleWidget extends StatelessWidget {
-  final List<Areas> area;
-  const TitleWidget({Key key, this.area}) : super(key: key);
-
+class CountriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _countryData = Provider.of<CountryData>(context, listen: false);
+    Countries _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
-    String selected = "Philippines";
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('E, MMMMd y').format(now);
+    var now = DateTime.parse(_countries.lastUpdated);
+    String formattedDate = DateFormat('MMMM d y hh:mm a').format(now);
     // TODO: implement build
     return Container(
       child: Column(
@@ -28,9 +27,7 @@ class TitleWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 3.0, bottom: 4.0),
             child: DropdownButton<String>(
-                value: _countryName.countryName == null
-                    ? selected
-                    : _countryName.countryName,
+                value: _countryName.countryName,
                 icon: Icon(Icons.arrow_drop_down),
                 isExpanded: true,
                 underline: Container(
@@ -46,9 +43,8 @@ class TitleWidget extends StatelessWidget {
                 onChanged: (String newValue) {
                   Provider.of<CountryName>(context, listen: false)
                       .setCountry(newValue);
-                  selected = newValue;
                 },
-                items: area
+                items: _countries.areas
                     .map((fc) => DropdownMenuItem<String>(
                           child: Text(fc.displayName),
                           value: fc.displayName,

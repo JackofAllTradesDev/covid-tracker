@@ -1,7 +1,7 @@
 import 'package:covidapp/screens/Home.dart';
 import 'package:covidapp/services/country-name.dart';
 import 'package:covidapp/services/theme.dart';
-import 'package:covidapp/widgets/future-builder.dart';
+import 'package:covidapp/widgets/home/future-builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +21,6 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider<ThemeChanger>(
         create: (_) => ThemeChanger(ThemeData.light()),
       ),
-      ChangeNotifierProvider<CountryName>(
-        create: (_) => CountryName(),
-      )
     ], child: MyHomePage());
   }
 }
