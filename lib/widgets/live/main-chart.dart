@@ -1,14 +1,5 @@
-import 'dart:math';
-
-import 'package:charts_flutter/flutter.dart';
-import 'package:covidapp/constants/constants.dart';
 import 'package:covidapp/model/chart-model.dart';
-import 'package:covidapp/model/countries.dart';
-import 'package:covidapp/services/countries-data.dart';
-import 'package:covidapp/services/country-name.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class MainChartWidget extends StatelessWidget {
@@ -28,7 +19,7 @@ class MainChartWidget extends StatelessWidget {
     // TODO: implement build
     return Container(
       height: 200.0,
-      width: 200,
+      width: 160.0,
       child: charts.PieChart(series,
           animate: true,
           // Configure the width of the pie slices to 30px. The remaining space in

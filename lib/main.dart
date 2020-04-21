@@ -1,5 +1,6 @@
-import 'package:covidapp/screens/Home.dart';
-import 'package:covidapp/services/country-name.dart';
+import 'package:covidapp/services/connectivity.dart';
+import 'package:covidapp/services/http-service.dart';
+import 'package:covidapp/services/retry.dart';
 import 'package:covidapp/services/theme.dart';
 import 'package:covidapp/widgets/home/future-builder.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +16,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final HttpService httpService = HttpService();
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      StreamProvider<ConnectionStatus>.value(
+        value: ConnectivityService().connectivityController.stream,
+      ),
       ChangeNotifierProvider<ThemeChanger>(
         create: (_) => ThemeChanger(ThemeData.light()),
+      ),
+      ChangeNotifierProvider<RetryChanger>(
+        create: (_) => RetryChanger(httpService.countries()),
       ),
     ], child: MyHomePage());
   }
@@ -30,6 +38,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeChanger>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme.getTheme(),

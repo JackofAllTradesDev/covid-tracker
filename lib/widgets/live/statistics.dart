@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:covidapp/constants/constants.dart';
 import 'package:covidapp/model/countries.dart';
 import 'package:covidapp/services/countries-data.dart';
@@ -19,88 +20,110 @@ class StatisticsWidget extends StatelessWidget {
     return Row(
       children: <Widget>[
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: new Color(Constants.colorCases),
-                ),
-                child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
+          child: Container(
+              height: 76.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: new Color(Constants.colorCases),
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: AutoSizeText(
                             "${formatter.format(_countries.areas[index].totalConfirmed)}",
+                            minFontSize: 18,
+                            maxLines: 1,
                             style: TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
-                        Text("Cases",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ))),
-          ),
+                      ),
+                      AutoSizeText("Cases",
+                          minFontSize: 14,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ))),
+        ),
+        SizedBox(
+          width: 5.0,
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: new Color(Constants.colorDeaths),
-                ),
-                child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
+          child: Container(
+              height: 76.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: new Color(Constants.colorDeaths),
+              ),
+              child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: AutoSizeText(
                             "${formatter.format(_countries.areas[index].totalDeaths)}",
+                            minFontSize: 18,
+                            maxLines: 1,
                             style: TextStyle(
                                 fontSize: 24,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold)),
-                        Text("Deaths",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ))),
-          ),
+                      ),
+                      AutoSizeText("Deaths",
+                          minFontSize: 14,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ))),
+        ),
+        SizedBox(
+          width: 5.0,
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: new Color(Constants.colorRecoveries),
+          child: Container(
+              height: 76.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: new Color(Constants.colorRecoveries),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: AutoSizeText(
+                          "${formatter.format(_countries.areas[index].totalRecovered)}",
+                          minFontSize: 18,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    AutoSizeText("Recovered",
+                        minFontSize: 14,
+                        maxLines: 1,
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                  ],
                 ),
-                child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                            "${formatter.format(_countries.areas[index].totalRecovered)}",
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                        Text("Recovered",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ))),
-          ),
+              )),
         )
       ],
     );

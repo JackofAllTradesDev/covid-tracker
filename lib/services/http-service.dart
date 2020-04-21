@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:covidapp/model/countries.dart';
 import 'package:dio/dio.dart';
 

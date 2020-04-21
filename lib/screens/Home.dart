@@ -1,5 +1,5 @@
 import 'package:covidapp/model/countries.dart';
-import 'package:covidapp/widgets/home/info.dart';
+import 'package:covidapp/screens/CreditsScreen.dart';
 import 'package:covidapp/widgets/home/live-data.dart';
 import 'package:covidapp/widgets/home/prevention.dart';
 import 'package:covidapp/widgets/home/symptoms.dart';
@@ -64,6 +64,16 @@ class HomePage extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
+                    IconButton(
+                      icon: Icon(Icons.info_outline),
+                      color: Colors.black,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CreditPage()),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -80,11 +90,11 @@ class HomePage extends StatelessWidget {
                   countries: countries,
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),
-                child: InfoWidget(),
-              ),
+//              Padding(
+//                padding:
+//                    const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),
+//                child: InfoWidget(),
+//              ),
               Padding(
                 padding:
                     const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),

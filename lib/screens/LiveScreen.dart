@@ -8,7 +8,6 @@ import 'package:covidapp/widgets/live/countries-dropdown.dart';
 import 'package:covidapp/widgets/live/map-location.dart';
 import 'package:covidapp/widgets/live/panel-statistics.dart';
 import 'package:covidapp/widgets/live/statistics.dart';
-import 'package:covidapp/widgets/live/title-widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -57,30 +56,25 @@ class LivePage extends StatelessWidget {
                   topLeft: Radius.circular(18.0)),
               color: new Color(Constants.colorMap),
               minHeight: 160.0,
-              panel: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: PanelStatsWidget(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: ChartWidget(),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Last Updated: ${formattedDate}",
+              panel: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: PanelStatsWidget(),
+                    ),
+                    ChartWidget(),
+                    Center(
+                      child: Text("Last Updated: $formattedDate",
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           )),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
               collapsed: Container(
                 decoration: BoxDecoration(

@@ -1,6 +1,7 @@
 import 'package:covidapp/model/countries.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class TotalWidget extends StatelessWidget {
   final Countries countries;
@@ -34,13 +35,16 @@ class TotalWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
+              height: 120.0,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 14.0, left: 14.0),
-                    child: Text("Total Cases".toUpperCase(),
+                    child: AutoSizeText("Total Cases".toUpperCase(),
+                        minFontSize: 18,
+                        maxLines: 1,
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -48,12 +52,15 @@ class TotalWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0, left: 14.0),
-                    child: Text(formatter.format(countries.totalConfirmed),
-                        style: TextStyle(
-                          fontSize: 68,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        )),
+                    child:
+                        AutoSizeText(formatter.format(countries.totalConfirmed),
+                            minFontSize: 18,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 68,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
                   )
                 ],
               ),
@@ -69,32 +76,34 @@ class TotalWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 14.0, left: 14.0),
-                          child: Text("Recovered".toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0, left: 14.0),
-                          child:
-                              Text(formatter.format(countries.totalRecovered),
-                                  style: TextStyle(
-                                    fontSize: 42,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  )),
-                        )
-                      ],
-                    ),
+                child: Container(
+                  height: 100.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 14.0, left: 14.0),
+                        child: AutoSizeText("Recovered".toUpperCase(),
+                            minFontSize: 18,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0, left: 14.0),
+                        child: AutoSizeText(
+                            formatter.format(countries.totalRecovered),
+                            minFontSize: 18,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 42,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -106,31 +115,35 @@ class TotalWidget extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 14.0, left: 14.0),
-                          child: Text("Deaths".toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0, left: 14.0),
-                          child: Text(formatter.format(countries.totalDeaths),
-                              style: TextStyle(
-                                fontSize: 42,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              )),
-                        )
-                      ],
-                    ),
+                child: Container(
+                  height: 100.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 14.0, left: 14.0),
+                        child: AutoSizeText("Deaths".toUpperCase(),
+                            minFontSize: 18,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8.0, left: 14.0, right: 14.0),
+                        child: AutoSizeText(
+                            formatter.format(countries.totalDeaths),
+                            minFontSize: 18,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: 42,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            )),
+                      )
+                    ],
                   ),
                 ),
               ),

@@ -4,4 +4,5 @@ class Constants {
   static const int colorDeaths = 0xFFF17171;
   static const int colorMap = 0xFF0E1625;
   static const int colorActive = 0xFFFBEAAB;
+  static const int colorWarning = 0xFFDD3E44;
 }

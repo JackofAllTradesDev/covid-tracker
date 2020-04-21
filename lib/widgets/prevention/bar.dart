@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppBarLiveWidget extends StatelessWidget {
+class AppBarPreventionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +16,7 @@ class AppBarLiveWidget extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          Text("World Statistics",
+          Text("Stay safe".toUpperCase(),
               style: TextStyle(
                   fontSize: 22,
                   color: Colors.white,

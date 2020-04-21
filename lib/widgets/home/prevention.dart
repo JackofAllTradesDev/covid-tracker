@@ -1,11 +1,10 @@
+import 'package:covidapp/screens/PreventionScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PreventionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final formatter = new NumberFormat("#,###");
     return Card(
         color: Colors.white,
         elevation: 8.0,
@@ -54,7 +53,13 @@ class PreventionWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             )),
-                        onPressed: () {}, //callback when button is clicked
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PreventionPage()),
+                          );
+                        }, //callback when button is clicked
                         borderSide: BorderSide(
                           color: Colors.black, //Color of the border
                           style: BorderStyle.solid, //Style of the border

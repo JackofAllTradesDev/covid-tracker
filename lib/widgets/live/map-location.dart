@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:covidapp/constants/constants.dart';
 import 'package:covidapp/model/countries.dart';
 import 'package:covidapp/services/countries-data.dart';
 import 'package:covidapp/services/country-name.dart';
@@ -43,7 +42,6 @@ class MapPageState extends State<MapWidget> {
     }
 
     gotoLocation(_countries.areas[index].lat, _countries.areas[index].long);
-
     // TODO: implement build
     return Container(
 //      height: 220.0,

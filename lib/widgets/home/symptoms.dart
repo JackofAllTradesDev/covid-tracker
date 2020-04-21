@@ -1,11 +1,10 @@
+import 'package:covidapp/screens/SymptomScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class SymptomsWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final formatter = new NumberFormat("#,###");
     return Card(
         color: Colors.white,
         elevation: 8.0,
@@ -45,22 +44,30 @@ class SymptomsWidgets extends StatelessWidget {
                           color: Colors.white,
                         )),
                   ),
-                  Padding(
-                      padding: const EdgeInsets.all(14.0),
-                      child: OutlineButton(
-                        child: Text("learn more".toUpperCase(),
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            )),
-                        onPressed: () {}, //callback when button is clicked
-                        borderSide: BorderSide(
-                          color: Colors.white, //Color of the border
-                          style: BorderStyle.solid, //Style of the border
-                          width: 0.8, //width of the border
-                        ),
-                      )),
+                  Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.all(14.0),
+                        child: OutlineButton(
+                          child: Text("learn more".toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              )),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SymptomsPage()),
+                            );
+                          }, //callback when button is clicked
+                          borderSide: BorderSide(
+                            color: Colors.white, //Color of the border
+                            style: BorderStyle.solid, //Style of the border
+                            width: 0.8, //width of the border
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ),

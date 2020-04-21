@@ -1,11 +1,10 @@
+import 'package:covidapp/screens/InfoScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final formatter = new NumberFormat("#,###");
     return Card(
         color: Colors.white,
         elevation: 8.0,
@@ -30,7 +29,7 @@ class InfoWidget extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0, left: 14.0),
-                    child: Text("All you need to know".toUpperCase(),
+                    child: Text("Learn more about".toUpperCase(),
                         style: TextStyle(
                             fontSize: 22,
                             color: Colors.white,
@@ -38,7 +37,7 @@ class InfoWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, left: 14.0),
-                    child: Text("about Covid-19".toUpperCase(),
+                    child: Text("Covid-19".toUpperCase(),
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -54,7 +53,12 @@ class InfoWidget extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             )),
-                        onPressed: () {}, //callback when button is clicked
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => InfoPage()),
+                          );
+                        }, //callback when button is clicked
                         borderSide: BorderSide(
                           color: Colors.white, //Color of the border
                           style: BorderStyle.solid, //Style of the border

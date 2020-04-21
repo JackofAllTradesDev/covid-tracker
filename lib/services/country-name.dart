@@ -1,4 +1,3 @@
-import 'package:covidapp/model/countries.dart';
 import 'package:flutter/material.dart';
 
 class CountryName with ChangeNotifier {
