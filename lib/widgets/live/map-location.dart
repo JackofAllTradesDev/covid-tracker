@@ -18,13 +18,15 @@ class MapPageState extends State<MapWidget> {
   Widget build(BuildContext context) {
     MapStyleClass mapStyleClass = MapStyleClass();
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
+    print("wewew ${_countries[0].name}");
     CountryName _countryName = Provider.of<CountryName>(context);
-    var index = _countries.areas
-        .indexWhere((prod) => prod.displayName == _countryName.countryName);
+    var index =
+        _countries.indexWhere((prod) => prod.name == _countryName.countryName);
     final CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(_countries.areas[index].lat, _countries.areas[index].long),
-      zoom: 5.897,
+      target: LatLng(_countries[index].coordinates.latitude,
+          _countries[index].coordinates.longitude),
+      zoom: 6.897,
     );
 
     void _onMapCreated(GoogleMapController controller) {
@@ -41,7 +43,8 @@ class MapPageState extends State<MapWidget> {
           zoom: 6.123)));
     }
 
-    gotoLocation(_countries.areas[index].lat, _countries.areas[index].long);
+    gotoLocation(_countries[index].coordinates.latitude,
+        _countries[index].coordinates.longitude);
     // TODO: implement build
     return Container(
 //      height: 220.0,

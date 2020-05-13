@@ -76,8 +76,8 @@ class CreditPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               child: AutoSizeText(
-                  "Coronaviruses are a large family of viruses which may cause illness in animals or humans." +
-                      " In humans, several coronaviruses are known to cause respiratory infections ranging from the common cold to more severe diseases such as Middle East Respiratory Syndrome (MERS) and Severe Acute Respiratory Syndrome (SARS).",
+                  "Have the latest information on Coronavirus disease (COVID-19) with the COVID-PH app. This app displays the latest updates, symptoms, prevention, and a tracker on COVID-19\n\n" +
+                      "Our goal is to provide reliable information and help prevent the spread of COVID-19.",
                   minFontSize: 12,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -89,8 +89,19 @@ class CreditPage extends StatelessWidget {
               height: 25,
             ),
             Padding(
+              padding:
+                  const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
+              child: AutoSizeText("Visit the following sites:",
+                  minFontSize: 12,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: AutoSizeText("Data: Bing.com/covid",
+              child: AutoSizeText("about-corona.net",
                   minFontSize: 12,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -100,7 +111,7 @@ class CreditPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-              child: AutoSizeText("Informations: who.int/cdc.gov",
+              child: AutoSizeText("who.int\ncdc.gov",
                   minFontSize: 12,
                   textAlign: TextAlign.start,
                   style: TextStyle(
@@ -116,7 +127,7 @@ class CreditPage extends StatelessWidget {
                   minFontSize: 12,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.bold)),
             ),
@@ -126,7 +137,7 @@ class CreditPage extends StatelessWidget {
                   minFontSize: 12,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.bold)),
             ),

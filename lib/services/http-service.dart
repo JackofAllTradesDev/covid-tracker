@@ -1,16 +1,23 @@
 import 'package:covidapp/model/countries.dart';
+import 'package:covidapp/model/timeline.dart';
 import 'package:dio/dio.dart';
 
 class HttpService {
-  final String getCountries = "https://bing.com/covid/data";
-  final String test = "http://corona-api.com/countries/PH";
+  final String getCountries = "https://corona-api.com/countries";
+  final String getTimeline = "https://corona-api.com/timeline";
   Dio dio = new Dio();
 
   Future<Countries> countries() async {
     var response = await dio.get(getCountries);
 
     var res = Countries.fromJson(response.data);
-//    print("test $res");
+    return res;
+  }
+
+  Future<Timeline> timeline() async {
+    var response = await dio.get(getTimeline);
+
+    var res = Timeline.fromJson(response.data);
     return res;
   }
 
@@ -19,7 +26,7 @@ class HttpService {
     var response = await dio.get(getCountries);
 
     var res = Countries.fromJson(response.data);
-//    print("test $res");
+    ;
     return res;
   }
 }

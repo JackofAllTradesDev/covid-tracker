@@ -1,5 +1,6 @@
 import 'package:covidapp/constants/constants.dart';
 import 'package:covidapp/model/countries.dart';
+import 'package:covidapp/model/timeline.dart';
 import 'package:covidapp/services/countries-data.dart';
 import 'package:covidapp/services/country-name.dart';
 import 'package:covidapp/widgets/live/bar.dart';
@@ -14,18 +15,18 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class LivePage extends StatelessWidget {
-  final Countries countries;
+  final List<Data> data;
 
-  const LivePage({Key key, this.countries}) : super(key: key);
+  const LivePage({Key key, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var now = DateTime.parse(countries.lastUpdated);
-    String formattedDate = DateFormat('MMMM d y hh:mm a').format(now);
+//    var now = DateTime.parse(data[0].updatedAt);
+//    String formattedDate = DateFormat('MMMM d y hh:mm a').format(now);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<CountryData>(
-            create: (_) => CountryData(countries),
+            create: (_) => CountryData(data),
           ),
           ChangeNotifierProvider<CountryName>(
             create: (_) => CountryName(),
@@ -65,14 +66,15 @@ class LivePage extends StatelessWidget {
                       child: PanelStatsWidget(),
                     ),
                     ChartWidget(),
-                    Center(
-                      child: Text("Last Updated: $formattedDate",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          )),
-                    )
+//                    Center(
+////                      child: Text("Last Updated: $formattedDate",
+//                      child: Text("Last Updated:",
+//                          style: TextStyle(
+//                            fontSize: 12,
+//                            fontWeight: FontWeight.bold,
+//                            color: Colors.white,
+//                          )),
+//                    )
                   ],
                 ),
               ),

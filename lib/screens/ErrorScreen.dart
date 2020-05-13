@@ -28,7 +28,8 @@ class ErrorPage extends StatelessWidget {
               color: Colors.white,
               textColor: Colors.red,
               onPressed: () async {
-                controller.setController(httpService.refreshCountries());
+                controller.setController(
+                    httpService.refreshCountries(), httpService.timeline());
               },
               child: Text(
                 "Retry",

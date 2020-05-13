@@ -8,8 +8,13 @@ class DropdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
+    _countries.sort((a, b) {
+      return b.latestData.confirmed.compareTo(a.latestData.confirmed);
+    });
+    List<Data> index =
+        _countries.where((prod) => prod.latestData.confirmed != 0).toList();
     // TODO: implement build
     return Container(
       decoration: BoxDecoration(
@@ -38,10 +43,10 @@ class DropdownWidget extends StatelessWidget {
                   Provider.of<CountryName>(context, listen: false)
                       .setCountry(newValue);
                 },
-                items: _countries.areas
+                items: index
                     .map((fc) => DropdownMenuItem<String>(
-                          child: Text(fc.displayName),
-                          value: fc.displayName,
+                          child: Text(fc.name),
+                          value: fc.name,
                         ))
                     .toList()),
           ),

@@ -17,8 +17,12 @@ class FutureBuilderPage extends StatelessWidget {
     var network = Provider.of<ConnectionStatus>(context);
     if (network == ConnectionStatus.wifi ||
         network == ConnectionStatus.mobileData) {
-      return FutureBuilder<Countries>(
-          future: controller.getController(),
+      return FutureBuilder<List<dynamic>>(
+          future: Future.wait([
+            controller.getController(),
+            controller.getTimeLine()
+            //... More futures
+          ]),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
@@ -42,10 +46,12 @@ class FutureBuilderPage extends StatelessWidget {
                   return Scaffold(body: Center(child: ErrorPage()));
                 return RefreshIndicator(
                   onRefresh: () async {
-                    controller.setController(httpService.refreshCountries());
+                    controller.setController(
+                        httpService.refreshCountries(), httpService.timeline());
                   },
                   child: HomePage(
-                      area: snapshot.data.areas, countries: snapshot.data),
+                      data: snapshot.data[0].data,
+                      timeline: snapshot.data[1].data),
                 );
             }
           });

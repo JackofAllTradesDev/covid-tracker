@@ -1,18 +1,19 @@
 import 'package:covidapp/model/countries.dart';
+import 'package:covidapp/model/timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class TotalWidget extends StatelessWidget {
-  final Countries countries;
+  final List<TimelineData> timeline;
 
-  const TotalWidget({Key key, this.countries}) : super(key: key);
+  const TotalWidget({Key key, this.timeline}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     final f = new DateFormat('MMMM d y hh:mm a');
     final formatter = new NumberFormat("#,###");
-    final finalDate = DateTime.parse(countries.lastUpdated);
+    final finalDate = DateTime.parse(timeline[0].updatedAt);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -52,15 +53,14 @@ class TotalWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0, left: 14.0),
-                    child:
-                        AutoSizeText(formatter.format(countries.totalConfirmed),
-                            minFontSize: 18,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 68,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            )),
+                    child: AutoSizeText(formatter.format(timeline[0].confirmed),
+                        minFontSize: 18,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontSize: 68,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        )),
                   )
                 ],
               ),
@@ -94,7 +94,7 @@ class TotalWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0, left: 14.0),
                         child: AutoSizeText(
-                            formatter.format(countries.totalRecovered),
+                            formatter.format(timeline[0].recovered),
                             minFontSize: 18,
                             maxLines: 1,
                             style: TextStyle(
@@ -133,15 +133,15 @@ class TotalWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(
                             top: 8.0, left: 14.0, right: 14.0),
-                        child: AutoSizeText(
-                            formatter.format(countries.totalDeaths),
-                            minFontSize: 18,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 42,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            )),
+                        child:
+                            AutoSizeText(formatter.format(timeline[0].deaths),
+                                minFontSize: 18,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 42,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                )),
                       )
                     ],
                   ),

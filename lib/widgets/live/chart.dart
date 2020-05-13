@@ -15,34 +15,31 @@ class ChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
-    var index = _countries.areas
-        .indexWhere((prod) => prod.displayName == _countryName.countryName);
-    var active = _countries.areas[index].totalConfirmed -
-        _countries.areas[index].totalDeaths -
-        _countries.areas[index].totalRecovered;
+    var index =
+        _countries.indexWhere((prod) => prod.name == _countryName.countryName);
+    var active = _countries[index].latestData.confirmed -
+        _countries[index].latestData.deaths -
+        _countries[index].latestData.recovered;
+
+    double activeRate = active / _countries[index].latestData.confirmed * 100;
+    double deathRate = _countries[index].latestData.calculated.deathRate;
+    double recoveryRate = _countries[index].latestData.calculated.recoveryRate;
     final percent = new NumberFormat("%");
-    double activeRate = active / _countries.areas[index].totalConfirmed * 100;
-    double deathRate = _countries.areas[index].totalDeaths /
-        _countries.areas[index].totalConfirmed *
-        100;
-    double recoveryRate = _countries.areas[index].totalRecovered /
-        _countries.areas[index].totalConfirmed *
-        100;
 
     final List<CovidPercentage> data = [
       CovidPercentage(
           type: "Active",
-          num: activeRate.roundToDouble(),
+          num: activeRate,
           barColor: charts.ColorUtil.fromDartColor(Colors.yellowAccent)),
       CovidPercentage(
           type: "Deaths",
-          num: deathRate.roundToDouble(),
+          num: deathRate,
           barColor: charts.ColorUtil.fromDartColor(Colors.redAccent)),
       CovidPercentage(
           type: "Recovered",
-          num: recoveryRate.roundToDouble(),
+          num: recoveryRate,
           barColor: charts.ColorUtil.fromDartColor(Colors.greenAccent))
     ];
 
@@ -72,7 +69,7 @@ class ChartWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: AutoSizeText(
-                        "${percent.format(active / _countries.areas[index].totalConfirmed)}",
+                        "${percent.format(active / _countries[index].latestData.confirmed)}",
                         minFontSize: 12,
                         maxLines: 1,
                         style: TextStyle(color: Colors.white, fontSize: 16),
@@ -98,7 +95,7 @@ class ChartWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: AutoSizeText(
-                          "${percent.format(_countries.areas[index].totalDeaths / _countries.areas[index].totalConfirmed)}",
+                          "%${deathRate.roundToDouble()}",
                           minFontSize: 12,
                           maxLines: 1,
                           style: TextStyle(color: Colors.white, fontSize: 16),
@@ -125,7 +122,7 @@ class ChartWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: AutoSizeText(
-                          "${percent.format(_countries.areas[index].totalRecovered / _countries.areas[index].totalConfirmed)}",
+                          "%${recoveryRate.roundToDouble()}",
                           minFontSize: 12,
                           maxLines: 1,
                           style: TextStyle(color: Colors.white, fontSize: 16),

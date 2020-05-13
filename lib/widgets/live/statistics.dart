@@ -11,10 +11,10 @@ class StatisticsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
-    var index = _countries.areas
-        .indexWhere((prod) => prod.displayName == _countryName.countryName);
+    var index =
+        _countries.indexWhere((prod) => prod.name == _countryName.countryName);
     final formatter = new NumberFormat("#,###");
     // TODO: implement build
     return Row(
@@ -34,7 +34,7 @@ class StatisticsWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: AutoSizeText(
-                            "${formatter.format(_countries.areas[index].totalConfirmed)}",
+                            "${formatter.format(_countries[index].latestData.confirmed)}",
                             minFontSize: 18,
                             maxLines: 1,
                             style: TextStyle(
@@ -70,7 +70,7 @@ class StatisticsWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: AutoSizeText(
-                            "${formatter.format(_countries.areas[index].totalDeaths)}",
+                            "${formatter.format(_countries[index].latestData.deaths)}",
                             minFontSize: 18,
                             maxLines: 1,
                             style: TextStyle(
@@ -106,7 +106,7 @@ class StatisticsWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 4.0),
                       child: AutoSizeText(
-                          "${formatter.format(_countries.areas[index].totalRecovered)}",
+                          "${formatter.format(_countries[index].latestData.recovered)}",
                           minFontSize: 18,
                           maxLines: 1,
                           style: TextStyle(

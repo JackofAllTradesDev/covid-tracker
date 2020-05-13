@@ -12,16 +12,11 @@ class SymptomsImagesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Center(
-          child: Container(
-            height: 240.0,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: new AssetImage("assets/whole.png"),
-                fit: BoxFit.cover,
-//              alignment: Alignment.center,
-              ),
-            ),
+          child: Image.asset(
+            "assets/whole.png",
+            height: 240,
+            width: double.infinity,
+            fit: BoxFit.contain,
           ),
         ),
         SizedBox(height: 24),

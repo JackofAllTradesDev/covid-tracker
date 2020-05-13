@@ -1,4 +1,5 @@
 import 'package:covidapp/model/countries.dart';
+import 'package:covidapp/model/timeline.dart';
 import 'package:covidapp/screens/CreditsScreen.dart';
 import 'package:covidapp/widgets/home/live-data.dart';
 import 'package:covidapp/widgets/home/prevention.dart';
@@ -8,10 +9,10 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   // This widget is the root of your application.
-  final List<Areas> area;
-  final Countries countries;
+  final List<Data> data;
+  final List<TimelineData> timeline;
 
-  const HomePage({Key key, this.area, this.countries}) : super(key: key);
+  const HomePage({Key key, this.data, this.timeline}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,14 +81,14 @@ class HomePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TotalWidget(
-                  countries: countries,
+                  timeline: timeline,
                 ),
               ),
               Padding(
                 padding:
                     const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),
                 child: LiveWidget(
-                  countries: countries,
+                  data: data,
                 ),
               ),
 //              Padding(

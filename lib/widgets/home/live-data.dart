@@ -3,9 +3,9 @@ import 'package:covidapp/screens/LiveScreen.dart';
 import 'package:flutter/material.dart';
 
 class LiveWidget extends StatelessWidget {
-  final Countries countries;
+  final List<Data> data;
 
-  const LiveWidget({Key key, this.countries}) : super(key: key);
+  const LiveWidget({Key key, this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -15,7 +15,7 @@ class LiveWidget extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => LivePage(
-                    countries: countries,
+                    data: data,
                   )),
         )
       },

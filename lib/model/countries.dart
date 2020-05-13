@@ -1,116 +1,186 @@
 class Countries {
-  String id;
-  String displayName;
-  List<Areas> areas;
-  int totalConfirmed;
-  int totalDeaths;
-  int totalRecovered;
-  int totalRecoveredDelta;
-  int totalDeathsDelta;
-  int totalConfirmedDelta;
-  String lastUpdated;
+  List<Data> data;
+  bool bCacheHit;
 
-  Countries(
-      {this.id,
-      this.displayName,
-      this.areas,
-      this.totalConfirmed,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.totalRecoveredDelta,
-      this.totalDeathsDelta,
-      this.totalConfirmedDelta,
-      this.lastUpdated});
+  Countries({this.data, this.bCacheHit});
 
   Countries.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    displayName = json['displayName'];
-    if (json['areas'] != null) {
-      areas = new List<Areas>();
-      json['areas'].forEach((v) {
-        areas.add(new Areas.fromJson(v));
+    if (json['data'] != null) {
+      data = new List<Data>();
+      json['data'].forEach((v) {
+        data.add(new Data.fromJson(v));
       });
     }
-    totalConfirmed = json['totalConfirmed'];
-    totalDeaths = json['totalDeaths'];
-    totalRecovered = json['totalRecovered'];
-    totalRecoveredDelta = json['totalRecoveredDelta'];
-    totalDeathsDelta = json['totalDeathsDelta'];
-    totalConfirmedDelta = json['totalConfirmedDelta'];
-    lastUpdated = json['lastUpdated'];
+    bCacheHit = json['_cacheHit'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['displayName'] = this.displayName;
-    if (this.areas != null) {
-      data['areas'] = this.areas.map((v) => v.toJson()).toList();
+    if (this.data != null) {
+      data['data'] = this.data.map((v) => v.toJson()).toList();
     }
-    data['totalConfirmed'] = this.totalConfirmed;
-    data['totalDeaths'] = this.totalDeaths;
-    data['totalRecovered'] = this.totalRecovered;
-    data['totalRecoveredDelta'] = this.totalRecoveredDelta;
-    data['totalDeathsDelta'] = this.totalDeathsDelta;
-    data['totalConfirmedDelta'] = this.totalConfirmedDelta;
-    data['lastUpdated'] = this.lastUpdated;
+    data['_cacheHit'] = this.bCacheHit;
     return data;
   }
 }
 
-class Areas {
-  String id;
-  String displayName;
-  int totalConfirmed;
-  int totalDeaths;
-  int totalRecovered;
-  int totalRecoveredDelta;
-  int totalConfirmedDelta;
-  String lastUpdated;
-  double lat;
-  double long;
-  String parentId;
+class Data {
+  Coordinates coordinates;
+  String name;
+  String code;
+  int population;
+  String updatedAt;
+  Today today;
+  LatestData latestData;
 
-  Areas(
-      {this.id,
-      this.displayName,
-      this.totalConfirmed,
-      this.totalDeaths,
-      this.totalRecovered,
-      this.totalRecoveredDelta,
-      this.totalConfirmedDelta,
-      this.lastUpdated,
-      this.lat,
-      this.long,
-      this.parentId});
+  Data(
+      {this.coordinates,
+      this.name,
+      this.code,
+      this.population,
+      this.updatedAt,
+      this.today,
+      this.latestData});
 
-  Areas.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    displayName = json['displayName'];
-    totalConfirmed = json['totalConfirmed'];
-    totalDeaths = json['totalDeaths'];
-    totalRecovered = json['totalRecovered'];
-    totalRecoveredDelta = json['totalRecoveredDelta'];
-    totalConfirmedDelta = json['totalConfirmedDelta'];
-    lastUpdated = json['lastUpdated'];
-    lat = json['lat'].toDouble();
-    long = json['long'].toDouble();
-    parentId = json['parentId'];
+  Data.fromJson(Map<String, dynamic> json) {
+    coordinates = json['coordinates'] != null
+        ? new Coordinates.fromJson(json['coordinates'])
+        : null;
+    name = json['name'];
+    code = json['code'];
+    population = json['population'];
+    updatedAt = json['updated_at'];
+    today = json['today'] != null ? new Today.fromJson(json['today']) : null;
+    latestData = json['latest_data'] != null
+        ? new LatestData.fromJson(json['latest_data'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['displayName'] = this.displayName;
-    data['totalConfirmed'] = this.totalConfirmed;
-    data['totalDeaths'] = this.totalDeaths;
-    data['totalRecovered'] = this.totalRecovered;
-    data['totalRecoveredDelta'] = this.totalRecoveredDelta;
-    data['totalConfirmedDelta'] = this.totalConfirmedDelta;
-    data['lastUpdated'] = this.lastUpdated;
-    data['lat'] = this.lat;
-    data['long'] = this.long;
-    data['parentId'] = this.parentId;
+    if (this.coordinates != null) {
+      data['coordinates'] = this.coordinates.toJson();
+    }
+    data['name'] = this.name;
+    data['code'] = this.code;
+    data['population'] = this.population;
+    data['updated_at'] = this.updatedAt;
+    if (this.today != null) {
+      data['today'] = this.today.toJson();
+    }
+    if (this.latestData != null) {
+      data['latest_data'] = this.latestData.toJson();
+    }
+    return data;
+  }
+}
+
+class Coordinates {
+  double latitude;
+  double longitude;
+
+  Coordinates({this.latitude, this.longitude});
+
+  Coordinates.fromJson(Map<String, dynamic> json) {
+    latitude = json['latitude'] != null ? json['latitude'].toDouble() : 0.0;
+    longitude = json['longitude'] != null ? json['longitude'].toDouble() : 0.0;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    return data;
+  }
+}
+
+class Today {
+  int deaths;
+  int confirmed;
+
+  Today({this.deaths, this.confirmed});
+
+  Today.fromJson(Map<String, dynamic> json) {
+    deaths = json['deaths'];
+    confirmed = json['confirmed'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['deaths'] = this.deaths;
+    data['confirmed'] = this.confirmed;
+    return data;
+  }
+}
+
+class LatestData {
+  int deaths;
+  int confirmed;
+  int recovered;
+  int critical;
+  Calculated calculated;
+
+  LatestData(
+      {this.deaths,
+      this.confirmed,
+      this.recovered,
+      this.critical,
+      this.calculated});
+
+  LatestData.fromJson(Map<String, dynamic> json) {
+    deaths = json['deaths'];
+    confirmed = json['confirmed'];
+    recovered = json['recovered'];
+    critical = json['critical'];
+    calculated = json['calculated'] != null
+        ? new Calculated.fromJson(json['calculated'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['deaths'] = this.deaths;
+    data['confirmed'] = this.confirmed;
+    data['recovered'] = this.recovered;
+    data['critical'] = this.critical;
+    if (this.calculated != null) {
+      data['calculated'] = this.calculated.toJson();
+    }
+    return data;
+  }
+}
+
+class Calculated {
+  double deathRate;
+  double recoveryRate;
+  double recoveredVsDeathRatio;
+  double casesPerMillionPopulation;
+
+  Calculated(
+      {this.deathRate,
+      this.recoveryRate,
+      this.recoveredVsDeathRatio,
+      this.casesPerMillionPopulation});
+
+  Calculated.fromJson(Map<String, dynamic> json) {
+    deathRate =
+        json['death_rate'] != null ? json['death_rate'].toDouble() : 0.0;
+    recoveryRate =
+        json['recovery_rate'] != null ? json['recovery_rate'].toDouble() : 0.0;
+    recoveredVsDeathRatio = json['recovered_vs_death_ratio'] != null
+        ? json['recovered_vs_death_ratio'].toDouble()
+        : 0.0;
+    casesPerMillionPopulation = json['cases_per_million_population'] != null
+        ? json['cases_per_million_population'].toDouble()
+        : 0.0;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['death_rate'] = this.deathRate;
+    data['recovery_rate'] = this.recoveryRate;
+    data['recovered_vs_death_ratio'] = this.recoveredVsDeathRatio;
+    data['cases_per_million_population'] = this.casesPerMillionPopulation;
     return data;
   }
 }

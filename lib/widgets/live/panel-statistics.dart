@@ -11,11 +11,13 @@ class PanelStatsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
-    var index = _countries.areas
-        .indexWhere((prod) => prod.displayName == _countryName.countryName);
+    var index =
+        _countries.indexWhere((prod) => prod.name == _countryName.countryName);
+    var now = DateTime.parse(_countries[index].updatedAt);
     final formatter = new NumberFormat("#,###");
+    String formattedDate = DateFormat('MMMM d y hh:mm a').format(now);
     // TODO: implement build
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,12 +28,23 @@ class PanelStatsWidget extends StatelessWidget {
             left: 16.0,
             right: 16.0,
           ),
-          child: Text("${_countryName.countryName}",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )),
+          child: Row(
+            children: <Widget>[
+              Text("${_countryName.countryName}",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  )),
+              Spacer(),
+              Text("$formattedDate",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  )),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -55,7 +68,7 @@ class PanelStatsWidget extends StatelessWidget {
                                   color: new Color(Constants.colorCases),
                                   fontWeight: FontWeight.bold)),
                           AutoSizeText(
-                              "${formatter.format(_countries.areas[index].totalConfirmed)}",
+                              "${formatter.format(_countries[index].latestData.confirmed)}",
                               minFontSize: 12,
                               maxLines: 1,
                               style: TextStyle(
@@ -84,7 +97,7 @@ class PanelStatsWidget extends StatelessWidget {
                                   color: new Color(Constants.colorDeaths),
                                   fontWeight: FontWeight.bold)),
                           AutoSizeText(
-                              "${formatter.format(_countries.areas[index].totalDeaths)}",
+                              "${formatter.format(_countries[index].latestData.deaths)}",
                               minFontSize: 12,
                               maxLines: 1,
                               style: TextStyle(
@@ -113,7 +126,7 @@ class PanelStatsWidget extends StatelessWidget {
                                   color: new Color(Constants.colorRecoveries),
                                   fontWeight: FontWeight.bold)),
                           AutoSizeText(
-                              "${formatter.format(_countries.areas[index].totalRecovered)}",
+                              "${formatter.format(_countries[index].latestData.recovered)}",
                               minFontSize: 12,
                               maxLines: 1,
                               style: TextStyle(

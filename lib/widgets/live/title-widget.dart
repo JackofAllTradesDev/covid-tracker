@@ -9,9 +9,11 @@ class CountriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _countryData = Provider.of<CountryData>(context, listen: false);
-    Countries _countries = _countryData.getCountries();
+    List<Data> _countries = _countryData.getCountries();
     CountryName _countryName = Provider.of<CountryName>(context);
-    var now = DateTime.parse(_countries.lastUpdated);
+    var index =
+        _countries.indexWhere((prod) => prod.name == _countryName.countryName);
+    var now = DateTime.parse(_countries[index].updatedAt);
     String formattedDate = DateFormat('MMMM d y hh:mm a').format(now);
     // TODO: implement build
     return Container(
@@ -44,10 +46,10 @@ class CountriesWidget extends StatelessWidget {
                   Provider.of<CountryName>(context, listen: false)
                       .setCountry(newValue);
                 },
-                items: _countries.areas
+                items: _countries
                     .map((fc) => DropdownMenuItem<String>(
-                          child: Text(fc.displayName),
-                          value: fc.displayName,
+                          child: Text(fc.name),
+                          value: fc.name,
                         ))
                     .toList()),
           ),

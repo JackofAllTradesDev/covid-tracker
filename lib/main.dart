@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
         create: (_) => ThemeChanger(ThemeData.light()),
       ),
       ChangeNotifierProvider<RetryChanger>(
-        create: (_) => RetryChanger(httpService.countries()),
+        create: (_) =>
+            RetryChanger(httpService.countries(), httpService.timeline()),
       ),
     ], child: MyHomePage());
   }
